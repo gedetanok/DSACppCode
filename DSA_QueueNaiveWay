@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+class Queue{
+public:
+    int size = 0;
+    int front = 0;
+    int rear = -1;
+    char *items;
+    
+    Queue(int queue_size){
+        size = queue_size;
+        items = new char[size];
+    }
+
+    void enqueue(char item){
+        if(isFull()){
+            cout << "WARNING: Queue is full!" << endl;
+        }
+        else {
+            rear++;
+            items[rear] = item;
+        }
+    }
+
+    char dequeue(){
+        if(isEmpty()){
+            cout << "WARNING: Queue is empty!" << endl;
+            return '\0'; // Mengembalikan karakter null ketika queue kosong
+        }
+        else {
+            char item = items[front++];
+            return item;
+        }
+    }
+
+    void printElement(){
+        for(int i = front; i <= rear; i++){
+            cout << items[i] << ", ";
+        }
+        cout << endl;
+        cout << "Total item = " << (rear - front + 1) << endl;
+    }
+
+    bool isFull(){
+        return (rear == size - 1);
+    }
+
+    bool isEmpty(){
+        return (front > rear);
+    }
+};
+
+
+int main(){
+    Queue q1(6);
+
+    q1.enqueue('A');
+    q1.enqueue('B');
+    q1.enqueue('C');
+
+    q1.dequeue();
+    q1.dequeue();
+    q1.dequeue();
+    q1.dequeue();
+
+
+
+
+    q1.printElement();
+    
+
+
+    return 0;
+}
